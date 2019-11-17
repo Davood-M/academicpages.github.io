@@ -15,6 +15,9 @@ My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelli
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 10/11/2019)
 
 **News**
+- I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png | width=25)
+ as an applied research (deep learning) intern on Summer 2020.
+
 - Our paper "Privacy-Aware Recommendation with Private-Attribute Protection using Adversarial Learning" is accepted in WSDM 2020.
 
-- Our paper "Deep Reinforcement Learning-based Text Anonymization against Private-Attribute Inference" is accepted in EMNLP 2019.
+- Our paper "Deep Reinforcement Learning-based Text Anonymization against Private-Attribute Inference" is accepted in EMNLP 2019. You can get it from [here](https://www.aclweb.org/anthology/D19-1240/).
