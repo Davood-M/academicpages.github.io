@@ -10,7 +10,7 @@ redirect_from:
 
 Hi!
 
-My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelligence from Shiraz University under supervision of [Prof. Ali Hamzeh](http://shirazu.ac.ir/faculty/home/ali/en). Currently, I am a first year PhD student at Arizona State University. My research interest mainly lies within machine learning algorithms and applications. Currently, I’m working on several Natural Language Processing and Reinforcement Learning projects.
+My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelligence from Shiraz University under supervision of [Prof. Ali Hamzeh](http://shirazu.ac.ir/faculty/home/ali/en). Currently, I am a first year PhD student at Arizona State University working at the [DMML lab](http://dmml.asu.edu/). My research interest mainly lies within machine learning algorithms and applications. Currently, I’m working on several Natural Language Processing and Reinforcement Learning projects.
 
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 10/11/2019)
 
