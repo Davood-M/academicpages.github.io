@@ -20,4 +20,4 @@ My resume is available [here](https://davood-m.github.io/files/resume.pdf) (upda
 
 - Our paper "Privacy-Aware Recommendation with Private-Attribute Protection using Adversarial Learning" is accepted in WSDM 2020. You can download it from [here](https://dl.acm.org/doi/pdf/10.1145/3336191.3371832).
 
-- Our paper "Deep Reinforcement Learning-based Text Anonymization against Private-Attribute Inference" is accepted in EMNLP 2019. You can download it from [here](https://www.aclweb.org/anthology/D19-1240/). [Slides] (https://davood-m.github.io/files/Slides_EMNLP19.pptx)
+- Our paper "Deep Reinforcement Learning-based Text Anonymization against Private-Attribute Inference" is accepted in EMNLP 2019. You can download it from [here](https://www.aclweb.org/anthology/D19-1240/). [Slides](https://davood-m.github.io/files/Slides_EMNLP19.pptx)
