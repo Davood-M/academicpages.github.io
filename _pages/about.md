@@ -10,14 +10,14 @@ redirect_from:
 
 Hi!
 
-My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelligence from Shiraz University under supervision of [Prof. Ali Hamzeh](http://shirazu.ac.ir/faculty/home/ali/en). Currently, I am a first year PhD student at Arizona State University working at the [DMML lab](http://dmml.asu.edu/). My research interest mainly lies within machine learning algorithms and applications. Currently, I’m working on several Natural Language Processing and Reinforcement Learning projects.
+My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelligence from Shiraz University under supervision of [Prof. Ali Hamzeh](http://shirazu.ac.ir/faculty/home/ali/en). Currently, I am a first year PhD student at Arizona State University working at the [DMML lab](http://dmml.asu.edu/) under supervision of [Prof. Huan Liu](http://www.public.asu.edu/~huanliu/). My research interest mainly lies within machine learning and natural language processing algorithms and applications.
 
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 10/11/2019)
 
 **News**
 - I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png)
- as an applied research (deep learning) intern on Summer 2020.
+ as an applied research (DL) intern on Summer 2020.
 
-- Our paper "Privacy-Aware Recommendation with Private-Attribute Protection using Adversarial Learning" is accepted in WSDM 2020.
+- Our paper "Privacy-Aware Recommendation with Private-Attribute Protection using Adversarial Learning" is accepted in WSDM 2020. You can download it from [here](https://dl.acm.org/doi/pdf/10.1145/3336191.3371832).
 
-- Our paper "Deep Reinforcement Learning-based Text Anonymization against Private-Attribute Inference" is accepted in EMNLP 2019. You can download it from [here](https://www.aclweb.org/anthology/D19-1240/).
+- Our paper "Deep Reinforcement Learning-based Text Anonymization against Private-Attribute Inference" is accepted in EMNLP 2019. You can download it from [here](https://www.aclweb.org/anthology/D19-1240/). [Slides] (https://davood-m.github.io/files/Slides_EMNLP19.pptx)
