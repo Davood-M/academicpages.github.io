@@ -15,9 +15,9 @@ My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelli
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 5/6/2020)
 
 **News**
-- I recieved the ASU Engineering Graduate Fellowship from Ira A. Fulton Schools of Engineering.
+- I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png) as an applied research (DL) intern on Summer 2021.
 
-[//]: <> (- I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png) as an applied research (DL) intern on Summer 2020.)
+- I recieved the ASU Engineering Graduate Fellowship from Ira A. Fulton Schools of Engineering.
 
 - Our paper "Privacy-Aware Recommendation with Private-Attribute Protection using Adversarial Learning" is accepted in WSDM 2020. You can download it from [here](https://dl.acm.org/doi/pdf/10.1145/3336191.3371832).
 
