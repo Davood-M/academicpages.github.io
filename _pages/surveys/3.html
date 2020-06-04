@@ -1,0 +1,528 @@
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>            
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style type="text/css">
+          /* Three image containers (use 25% for four, and 50% for two, etc) */
+              .column {
+                float: left;
+                width: 50%;
+                padding: 20px 0px 0px 50px;
+              }
+
+              @media screen and (max-width: 500px) {
+                .column {
+                  width: 100%;
+                }
+              }
+
+              /* Clear floats after image containers */
+              .row::after {
+                content: "";
+                clear: both;
+                display: table;
+              }
+            
+            .buttons {                
+                border-radius:4px;
+                display:inline-block;
+                cursor:pointer;
+                font-family:Arial;
+                font-size:13px;
+                font-weight:bold;
+                padding:6px 15px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #5b8a3c;
+                margin-left: 6px;
+                width: 100px;
+            }
+            
+            .aibtn {
+                border-radius:4px;
+                display:inline-block;
+                cursor:pointer;
+                font-family:Arial;
+                font-size:13px;
+                font-weight:bold;
+                padding:6px 15px;
+                text-decoration:none;
+                margin-left: 6px;
+                width: 200px;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                background:linear-gradient(to bottom, #f8df20 5%, #f8df20 100%);
+                border-color:transparent #f5e77a #d3bc0d transparent;
+                background-clip:padding-box;
+            }
+            
+            #inter_btn {
+                color:#ffffff;
+                background:linear-gradient(to bottom, #a8a8a8 5%, #a8a8a8 100%);
+                background-color: #a8a8a8;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                border-color:transparent #dddddd #c1c1c1 transparent;
+                background-clip:padding-box;
+            }
+            
+            #btn1 {
+                color:#ffffff;
+                background:linear-gradient(to bottom, #28A745 5%, #28A745 100%);
+                background-color:#28A745;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                border-color:transparent #30E750 #17C636 transparent;
+                background-clip:padding-box;
+            }
+            
+            #btn2 {
+                color:#ffffff;
+                background-color:#BA0B11;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                border-color:transparent #FC585C #F33439 transparent;
+                background-clip:padding-box;
+            }
+            
+            #btn3 {
+                color:#ffffff;
+                background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+                background-color:#2b638f;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                border-color:transparent #7BB9C6 #599bb3 transparent;
+                background-clip:padding-box;
+            }
+            
+            .buttons:active {
+                position:relative;
+                top:1px;
+            }
+            
+            .border {
+                border-width:5px !important;
+            }
+            
+            #start_btn {
+                box-shadow:inset 0px 1px 3px 0px #91b8b3;
+                background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+                background-color:#768d87;
+                border-radius:5px;
+                border:1px solid #566963;
+                display:inline-block;
+                cursor:pointer;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:15px;
+                font-weight:bold;
+                padding:11px 23px;
+                text-decoration:none;
+                text-shadow:0px -1px 0px #2b665e;
+            }
+            #start_btn:hover {
+                background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+                background-color:#6c7c7c;
+            }
+            #start_btn:active {
+                position:relative;
+                top:1px;
+            }
+            
+
+        </style>
+        
+        <script language='Javascript'>
+            var not_started = true;
+            var qualtrics_id = '';
+            
+            function loadFile(filePath) {
+                var result = null;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", filePath, false);
+                xmlhttp.send();
+                if (xmlhttp.status==200) {
+                    result = xmlhttp.responseText;
+                }
+                return result;
+            }
+            
+            function start_btn_event() {
+                var qual_val = document.getElementById('qualid').value;
+                if (qual_val != '') {
+                    document.getElementById('start_btn').style.visibility = 'hidden';
+                    document.getElementById('qualid').style.visibility = 'hidden';
+                    document.getElementById('textq').style.visibility = 'hidden';
+                    document.getElementById('survey_form').style.visibility = 'visible';
+                    not_started = false;
+                    qualtrics_id = qual_val;
+                    document.getElementById('survey_form').style.visibility = 'visible';
+                    document.getElementById('start_btn').remove();
+                    document.getElementById('top_pad').style.paddingTop = '0px';
+                } else {
+                    alert('Please enter your provided Qualtrics ID!');
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'></script>
+        <div id="my_survey">
+            <div class="container" >
+                <div id='top_pad' class='row align-middle mx-auto d-block' style="padding-top: 200;">
+                    <label for="qualid" id="textq">Qualtrics ID:</label>
+                    <input type="text" class="form-control" id="qualid">
+                </div>
+                <div class='row align-middle mx-auto d-block'>
+                    <button id="start_btn" style="margin: 200px; margin-top: 50px; padding: 20px; visibility: hidden;" type="button" onclick="start_btn_event()" class="vertical-center align-middle mx-auto d-block">Start Survey</button>
+                </div>
+            </div>
+            <div id="survey_form" style="visibility: hidden;">
+                <!-- HTML to handle creating the HIT form -->
+                <form name='mturk_form' method='post' id='mturk_form' action='https://workersandbox.mturk.com/mturk/externalSubmit'>
+                <input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+                <!-- This is where you define your question(s) --> 
+                    
+                <div class="container" >
+                    <div class="row" style="margin-top: 20px;">
+                    <!-- images row -->
+                        <div class="col">
+                            <img id="img1" src="" alt="img1" style="width:200px;height:200px;" class="float-right">
+                        </div>
+                        <div class="col align-self-center">
+                            <img id="img2" src="" alt="img2" style="width:200px;height:200px;" class="float-left">
+                        </div>
+                    </div>
+                    
+                    <div class="row text-center d-flex justify-content-center" style="margin-top: 35px;">
+                        <div style="font-family:tahoma,garamond,serif;font-size:16px;"><b>How do you classify these two images?</b></div>
+                    </div>
+                    
+                    <div class="row" style="margin-top: 20px;">
+                        <div class=col>
+                            <button id="AI-dec" onclick="" type="button" style="font-family:tahoma,garamond,serif;font-size:15px; font-weight: bold; margin-top: 15px;" class="aibtn float-right">Show Suggestion</button>
+                        </div>
+                        
+                        <div class=col>
+                            <div style="width: 200px; height: 50px;" class="progress" id='pdiv'>
+                                <div id="pbar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div id="timer" class="justify-content-left d-flex position-absolute w-100" style="color: black; font-size:16px; margin-left: 10px;">Timer</div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                    <div id="inter" class="row d-flex justify-content-center" style="margin-top: 30px;  margin-bottom: -65px;">
+                        <div  class="align-self-center">
+                            <button class="buttons" id="inter_btn" type="button" onclick="">Intervene</button>
+                        </div>
+                    </div>
+                    
+                    <div class="row d-flex justify-content-center" style="margin-top: 30px;">
+                        <div id="btns_div" class="align-self-center">
+                            <button class="buttons" id="btn1" type="button" onclick="">Same</button>
+                            <button class="buttons" id="btn2" type="button" onclick="">Different</button>
+                            <button class="buttons" id="btn3" type="button" onclick="">Unsure</button>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="margin-top: 45px;">
+                        <div class=col>
+                            <div style="font-family:tahoma,garamond,serif;font-size:16px;" class="float-right"><p id="remain"></p></div>
+                        </div>
+                        
+                        <div class=col>
+                          
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+                <input type="submit" id="submitButton" name="commit" value="Complete HIT" style="visibility: hidden;"/>
+                </form>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script language='javascript'>
+            //When the page has loaded.
+            turkSetAssignmentID();
+            var current_time = 5;
+            var time_limit = 60 * 30;
+            var total_time = 0;
+            var clicked = false;
+            var aipair = false;
+            document.getElementById('survey_form').style.visibility = 'hidden';
+            
+            var files = [];
+            var filenames = loadFile("https://samples4project.s3.us-east-2.amazonaws.com/pairs.txt").split('\n');
+            for (var i=0; i<filenames.length; i++) {
+                files.push(filenames[i].split(', '));
+            }
+            var probs = Array(1.0, 0.75, 0.5, 0.25, 0.0);
+            var workflow_ind = 2; // Math.floor(Math.random() * probs.length);
+            var soft_prob = probs[workflow_ind];
+            console.log('Workflow = ' + workflow_ind);
+            document.getElementById('start_btn').style.visibility = 'visible';
+            var current_pair_ind = Math.floor((Math.random() * (filenames.length - 1)));
+            var user_result = {}
+            
+            // disable decision buttons
+            hide_buttons();         
+            
+            // set button events
+            document.getElementById("btn1").onclick = function () {if(add_user_response(1)) hide_buttons();};
+            document.getElementById("btn2").onclick = function () {if(add_user_response(2)) hide_buttons();};
+            document.getElementById("btn3").onclick = function () {if(add_user_response(3)) hide_buttons();};
+            document.getElementById("inter").onclick = function () {intervene();};
+            bg = document.getElementById("AI-dec").style.background;
+            br = document.getElementById("AI-dec").style.border;
+            
+            // create the time here
+            current_time = 0;
+            max_time = 0
+            var wait_flag = 0;
+            var timer = setInterval(function(){
+                if (not_started == false){
+                    current_time -= 1;
+                    total_time += 1;
+                    
+                    if (total_time >= time_limit || current_pair_ind == files.length) {
+                        stop_survey();
+                    }
+                    
+                    if (current_time < 0) {
+                        wait_flag = false;
+                        // goto next image or case here
+                        // check if the survey is finished
+                        if(current_pair_ind == files.length) {
+                            stop_survey();
+                        }
+
+                        // remove past borders
+                        if ($("#img1").hasClass("border-danger")) {
+                            document.getElementById("img1").classList.remove('border');
+                            document.getElementById("img2").classList.remove('border');
+                            document.getElementById("img1").classList.remove('border-danger');
+                            document.getElementById("img2").classList.remove('border-danger');
+                        } else {
+                            document.getElementById("img1").classList.remove('border');
+                            document.getElementById("img2").classList.remove('border');
+                            document.getElementById("img1").classList.remove('border-success');
+                            document.getElementById("img2").classList.remove('border-success');
+                        }
+
+                        // get a random chance for displaying AI or not
+                        if(Math.random() > soft_prob) {
+                            // Display human
+                            clicked = false;
+                            aipair = false;
+                            document.getElementById("img1").style.border = "";
+                            document.getElementById("img2").style.border = "";
+                            $("#img1").attr("src", files[current_pair_ind][0]);
+                            $("#img2").attr("src", files[current_pair_ind][1]);
+                            document.getElementById('inter').style.visibility = 'hidden';
+                            document.getElementById('timer').style.visibility = 'hidden';
+                            document.getElementById('pdiv').style.visibility = 'hidden';
+                            document.getElementById('AI-dec').style.visibility = 'visible';
+                            document.getElementById("AI-dec").classList.add('aibtn');
+                            document.getElementById("AI-dec").style.background = bg;
+                            document.getElementById("AI-dec").style.border = br;
+                            document.getElementById("AI-dec").innerHTML = 'Show AI\'s Suggestion';
+                            document.getElementById("AI-dec").onclick = function () {show_sugg();};
+                            
+                            // show deciding buttons
+                            current_time = 31;
+                            current_pair_ind = Math.floor((Math.random() * (filenames.length - 1)));
+                            max_time = 31;
+                            show_buttons();
+                        } else {
+                            // Display AI pair
+                            aipair = true;
+                            clicked = false;
+                            $("#img1").attr("src", files[current_pair_ind][0]);
+                            $("#img2").attr("src", files[current_pair_ind][1]);
+                            current_time = 6;
+                            document.getElementById("AI-dec").classList.remove('aibtn');
+                            document.getElementById("AI-dec").style.background = 'none';
+                            document.getElementById("AI-dec").style.border = 'none';
+                            document.getElementById("AI-dec").onclick = function () {};
+
+                            // display text for AI decision
+                            document.getElementById('AI-dec').style.visibility = 'visible';
+                            document.getElementById('inter').style.visibility = 'visible';
+                            document.getElementById('btns_div').style.visibility = 'hidden';
+                            document.getElementById('timer').style.visibility = 'visible';
+                            document.getElementById('pdiv').style.visibility = 'visible';
+
+                            
+                            f1 = files[current_pair_ind][0].split('/');
+                            f1 = f1[f1.length - 1].split('_')[0];
+
+                            if (f1 == 0) {
+                                // set color and text
+                                document.getElementById("AI-dec").innerHTML = 'AI Decides = <span style="color: green;">Same</span>';
+                                document.getElementById("img1").classList.add('border');
+                                document.getElementById("img2").classList.add('border');
+                                document.getElementById("img1").classList.add('border-success');
+                                document.getElementById("img2").classList.add('border-success');
+                            }
+                            else {
+                                document.getElementById("AI-dec").innerHTML = 'AI Decides = <span style="color: red;">Different</span>';
+                                document.getElementById("img1").classList.add('border');
+                                document.getElementById("img2").classList.add('border');
+                                document.getElementById("img1").classList.add('border-danger');
+                                document.getElementById("img2").classList.add('border-danger');
+
+                            }
+                            
+                            current_pair_ind = Math.floor((Math.random() * (filenames.length - 1)));
+                            max_time = 6;
+                        }
+
+                    } else {
+                        // wait at least for 5 seconds
+                        if (wait_flag == 0){ 
+                            document.getElementById("timer").innerHTML = 'Decision Timeout: ' + current_time;
+                            document.getElementById("pbar").style.width = ((100 * (current_time)) / (max_time - 1)).toString() + '%';
+                        } else {
+                            document.getElementById("timer").innerHTML = 'Wait: ' + current_time;
+                            document.getElementById("pbar").style.width = ((100 * (current_time)) / (wait_flag - 1)).toString() + '%';
+                        }
+                    }
+                    
+                    // show remaining time
+                    var time = time_limit - total_time;
+                    var minutes = Math.floor(time / 60);
+                    var seconds = time - minutes * 60;
+                    var finalTime = str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
+                    document.getElementById("remain").innerHTML = '<b>Total time remaining:</b> ' + finalTime;
+                }
+
+            }, 1000);
+            
+            function str_pad_left(string,pad,length) {
+                return (new Array(length+1).join(pad)+string).slice(-length);
+            }
+            
+            // intervene button
+            function intervene() {
+                // show deciding buttons
+                not_started = true;
+                current_time = 31;
+                max_time = 31;
+                document.getElementById('inter').style.visibility = 'hidden';
+                not_started = false;
+                show_buttons();
+            }
+            
+            // add user response function
+            function add_user_response(resp) {
+                if (!clicked) {
+                    alert('Please check the AI\'s suggestion first!');
+                    return false;
+                }
+                
+                // get image pair names
+                var img1_path = document.getElementById('img1').getAttribute('src').split("/");
+                var img2_path = document.getElementById('img2').getAttribute('src').split("/");
+                img1_path = img1_path[img1_path.length - 1];
+                img2_path = img2_path[img2_path.length - 1];
+                
+                user_result[img1_path + ' ' + img2_path] = resp + '|' + clicked + '|' + aipair;
+                if (current_time >= 26) {
+                    wait_flag = 7 - (31 - current_time);
+                    current_time = wait_flag;
+                } else{
+                    wait_flag = 0;
+                    current_time = 0;
+                }
+                document.getElementById('timer').style.visibility = 'visible';
+                document.getElementById('pdiv').style.visibility = 'visible';
+                return true;
+            }
+            
+            function show_sugg() {
+                // show AI suggestion
+                f1 = files[current_pair_ind][0].split('/');
+                f1 = f1[f1.length - 1].split('_')[0];
+                clicked = true;
+
+                if (f1 == 0) {
+                    // set color and text
+                    document.getElementById("AI-dec").innerHTML = 'AI Suggests = <span style="color: green;">Same</span>';
+                    document.getElementById("img1").classList.add('border');
+                    document.getElementById("img2").classList.add('border');
+                    document.getElementById("img1").classList.add('border-success');
+                    document.getElementById("img2").classList.add('border-success');
+                } else {
+                    document.getElementById("AI-dec").innerHTML = 'AI Suggests = <span style="color: red;">Different</span>';
+                    document.getElementById("img1").classList.add('border');
+                    document.getElementById("img2").classList.add('border');
+                    document.getElementById("img1").classList.add('border-danger');
+                    document.getElementById("img2").classList.add('border-danger');
+                }
+                document.getElementById("AI-dec").classList.remove('aibtn');
+                document.getElementById("AI-dec").style.background = 'none';
+                document.getElementById("AI-dec").style.border = 'none';
+                
+            }
+            
+            // stop survey func
+            function stop_survey() {
+                clearInterval(timer);
+                document.getElementById('survey_form').style.visibility = 'hidden';
+                                
+                $("#mturk_form").submit( function(eventObj) {
+                      $("<input />").attr("type", "hidden")
+                          .attr("name", "user_response")
+                          .attr("value", JSON.stringify(user_result))
+                          .appendTo("#mturk_form");
+                    
+                      $("<input />").attr("type", "hidden")
+                          .attr("name", "workflow_ind")
+                          .attr("value", JSON.stringify(workflow_ind))
+                          .appendTo("#mturk_form");
+                    
+                      $("<input />").attr("type", "hidden")
+                          .attr("name", "qualtrics_id")
+                          .attr("value", JSON.stringify(qualtrics_id))
+                          .appendTo("#mturk_form");
+                    
+                      return true;
+                });
+                
+                var count = 0;
+                for (var i in user_result) {
+                   if (user_result.hasOwnProperty(i)) count++;
+                }
+                // set minimum number of images
+                if (count >= 10){
+                    document.getElementById('submitButton').click();
+                }
+                else{
+                    alert('Not Enough Activity!');
+                }
+            }
+                
+            
+            // show and hide buttons functions
+            function show_buttons() {
+                document.getElementById('btns_div').style.visibility = 'visible';
+            }
+            
+            function hide_buttons() {
+                document.getElementById('btns_div').style.visibility = 'hidden';
+                document.getElementById('inter').style.visibility = 'hidden';
+            }
+
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
