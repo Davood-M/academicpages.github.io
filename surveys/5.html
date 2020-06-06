@@ -422,7 +422,7 @@
             
             // add user response function
             function add_user_response(resp) {
-                if (!clicked) {
+                if (!clicked && !aipair) {
                     alert('Please check the AI\'s suggestion first!');
                     return false;
                 }
