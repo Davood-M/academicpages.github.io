@@ -107,6 +107,14 @@
                 border-width:10px !important;
             }
             
+            .progress .bar {
+                -webkit-transition: none !important;
+                -moz-transition: none !important;
+                -ms-transition: none !important;
+                -o-transition: none !important;
+                transition: none !important;
+            }
+            
             #start_btn {
                 box-shadow:inset 0px 1px 3px 0px #91b8b3;
                 background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
@@ -156,6 +164,7 @@
                     document.getElementById('start_btn').style.visibility = 'hidden';
                     document.getElementById('qualid').style.visibility = 'hidden';
                     document.getElementById('textq').style.visibility = 'hidden';
+                    document.getElementById('textmturk').style.visibility = 'hidden';
                     document.getElementById('survey_form').style.visibility = 'visible';
                     not_started = false;
                     qualtrics_id = qual_val;
@@ -168,16 +177,21 @@
             }
             
             var progress_str = '<div class=col id="pbar-div"><div style="width: 200px; height: 50px;" class="progress" id="pdiv"><div id="pbar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div id="timer" class="justify-content-left d-flex position-absolute w-100" style="color: black; font-size:16px; margin-left: 10px;">Timer</div></div></div></div>';
+            
+            var final_id = '<div id="top_pad_final" class="row align-middle mx-auto d-block" style="padding-top: 200;"><label for="qualid" id="textmturk">Please complete the final suvery using your MTurk Worker ID and provide the generated code at the end: <a href="https://asu.co1.qualtrics.com/jfe/preview/SV_6V77TV5eM0lhEXP?Q_SurveyVersionID=current&Q_CHL=preview" target="_blank">Start survey (opens in a new tab)</a></label> <br><br><label for="qualid" id="textq_final">Qualtrics provided ID:</label><input type="text" class="form-control" id="qualid_final"></div><div class="row align-middle mx-auto d-block"><button id="start_btn" style="margin: 200px; margin-top: 50px; padding: 20px;" type="button" onclick="submit_survey()" class="vertical-center align-middle mx-auto d-block">Submit Survey</button></div>';
+            
         </script>
     </head>
     <body>
         <script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'></script>
         <div id="my_survey">
-            <div class="container" >
+            <div class="container" id="top_container">
                 <div id='top_pad' class='row align-middle mx-auto d-block' style="padding-top: 200;">
-                    <label for="qualid" id="textq">Qualtrics ID:</label>
+                    <label for="qualid" id="textmturk">Please complete this suvery first using your MTurk Worker ID and provide the generated code at the end: <a href="https://asu.co1.qualtrics.com/jfe/form/SV_4MfbxVNtDXYRHSJ" target="_blank">Start survey (opens in a new tab)</a></label> <br><br>
+                    <label for="qualid" id="textq">Qualtrics provided ID:</label>
                     <input type="text" class="form-control" id="qualid">
                 </div>
+                
                 <div class='row align-middle mx-auto d-block'>
                     <button id="start_btn" style="margin: 200px; margin-top: 50px; padding: 20px; visibility: hidden;" type="button" onclick="start_btn_event()" class="vertical-center align-middle mx-auto d-block">Start Survey</button>
                 </div>
@@ -236,7 +250,7 @@
                     -->
                     
                     <div class="row justify-content-center" style="margin-top: -230px; height: 200px; background-color: #ffffff; z-index: -1;">
-                        <b class="align-self-center" id="final-dec"></b>
+                        <b class="align-self-center" id="final-dec" style="font-family:tahoma,garamond,serif;font-size:16px;"></b>
                     </div>
                     
                 </div>
@@ -249,7 +263,7 @@
             //When the page has loaded.
             turkSetAssignmentID();
             var current_time = 5;
-            var time_limit = 60 * 30;
+            var time_limit = 10 * 30; // 60 * 30;
             var total_time = 0;
             var clicked = false;
             var aipair = false;
@@ -365,6 +379,10 @@
                         // get a random chance for displaying AI or not
                         if(Math.random() > soft_prob) {
                             // Display human
+                            if ($("#AI-dec").hasClass('float-right')) {
+                                document.getElementById("AI-dec").classList.remove('float-right');
+                                document.getElementById("AI-dec").classList.add('text-center');
+                            }
                             clicked = false;
                             aipair = false;
                             document.getElementById("img1").style.border = "";
@@ -401,6 +419,10 @@
                             if (!document.getElementById('pbar-div')){
                                 $("#aisugg").append(progress_str);
                             }
+                            if (!$("#AI-dec").hasClass("float-right")) {
+                                document.getElementById("AI-dec").classList.remove('text-center');
+                                document.getElementById("AI-dec").classList.add('float-right');
+                            }
                             aipair = true;
                             clicked = false;
                             $("#img1").attr("src", files[current_pair_ind][0]);
@@ -421,7 +443,7 @@
                             
                             f1 = files[current_pair_ind][0].split('/');
                             f1 = f1[f1.length - 1].split('_')[0];
-
+                            
                             remove_past_borders();
                             
                             if (f1 == 0) {
@@ -462,7 +484,7 @@
                     var minutes = Math.floor(time / 60);
                     var seconds = time - minutes * 60;
                     var finalTime = str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
-                    document.getElementById("remain").innerHTML = '<b>Total time remaining:</b> ' + finalTime;
+                    // document.getElementById("remain").innerHTML = '<b>Total time remaining:</b> ' + finalTime;
                 }
 
             }, 1000);
@@ -505,7 +527,6 @@
             function add_user_response(resp) {
                 if (!clicked && !aipair && clicked_count == 0) {
                     alert('Please check the AI\'s suggestion first!');
-                    clicked_count = 1;
                     return false;
                 }
                 
@@ -528,6 +549,11 @@
                     document.getElementById('pdiv').style.visibility = 'visible';
                 }
                 user_decided = resp;
+                
+                if(!aipair) {
+                    clicked_count = 1;
+                }
+                
                 return true;
             }
             
@@ -559,41 +585,68 @@
                 
             }
             
+            function submit_survey() {
+                var final_id = document.getElementById('qualid_final').value;
+                
+                if (final_id == '') {
+                    alert('Please enter the provided ID from the last suvey!');
+                } else {    
+                    $("#mturk_form").submit( function(eventObj) {
+                          $("<input />").attr("type", "hidden")
+                              .attr("name", "user_response")
+                              .attr("value", JSON.stringify(user_result))
+                              .appendTo("#mturk_form");
+
+                          $("<input />").attr("type", "hidden")
+                              .attr("name", "workflow_ind")
+                              .attr("value", JSON.stringify(workflow_ind))
+                              .appendTo("#mturk_form");
+
+                          $("<input />").attr("type", "hidden")
+                              .attr("name", "qualtrics_id_1")
+                              .attr("value", JSON.stringify(qualtrics_id))
+                              .appendTo("#mturk_form");
+                          $("<input />").attr("type", "hidden")
+                              .attr("name", "qualtrics_id_2")
+                              .attr("value", JSON.stringify(final_id))
+                              .appendTo("#mturk_form");
+
+                          return true;
+                    });
+
+                    var count = 0;
+                    for (var i in user_result) {
+                       if (user_result.hasOwnProperty(i)) count++;
+                    }
+                    // set minimum number of images
+                    if (count >= 1){
+                        document.getElementById('submitButton').click();
+                    }
+                    else{
+                        alert('Not Enough Activity!');
+                    }
+                }
+            }
+            
             // stop survey func
             function stop_survey() {
+                // stop survey and show the final prompt
                 clearInterval(timer);
                 document.getElementById('survey_form').style.visibility = 'hidden';
-                                
-                $("#mturk_form").submit( function(eventObj) {
-                      $("<input />").attr("type", "hidden")
-                          .attr("name", "user_response")
-                          .attr("value", JSON.stringify(user_result))
-                          .appendTo("#mturk_form");
-                    
-                      $("<input />").attr("type", "hidden")
-                          .attr("name", "workflow_ind")
-                          .attr("value", JSON.stringify(workflow_ind))
-                          .appendTo("#mturk_form");
-                    
-                      $("<input />").attr("type", "hidden")
-                          .attr("name", "qualtrics_id")
-                          .attr("value", JSON.stringify(qualtrics_id))
-                          .appendTo("#mturk_form");
-                    
-                      return true;
-                });
-                
-                var count = 0;
-                for (var i in user_result) {
-                   if (user_result.hasOwnProperty(i)) count++;
-                }
-                // set minimum number of images
-                if (count >= 10){
-                    document.getElementById('submitButton').click();
-                }
-                else{
-                    alert('Not Enough Activity!');
-                }
+                document.getElementById('row1').style.visibility = 'hidden';
+                document.getElementById('aisugg').style.visibility = 'hidden';
+                document.getElementById('inter').style.visibility = 'hidden';
+                document.getElementById('AI-dec').style.visibility = 'hidden';
+                document.getElementById('btns-row').style.visibility = 'hidden';
+                document.getElementById('btns_div').style.visibility = 'hidden';
+                document.getElementById('survey_form').style.display = 'none';
+                document.getElementById('row1').style.display = 'none';
+                document.getElementById('aisugg').style.display = 'none';
+                document.getElementById('inter').style.display = 'none';
+                document.getElementById('AI-dec').style.display = 'none';
+                document.getElementById('btns-row').style.display = 'none';
+                document.getElementById('btns_div').style.display = 'none';
+                $('#top_container').html(final_id);
             }
                 
             
