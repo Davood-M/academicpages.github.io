@@ -39,6 +39,7 @@
             
             .aibtn {
                 border-radius:4px;
+                color: #ffffff;
                 display:inline-block;
                 cursor:pointer;
                 font-family:Arial;
@@ -46,13 +47,12 @@
                 font-weight:bold;
                 padding:6px 15px;
                 text-decoration:none;
-                margin-left: 6px;
                 width: 200px;
                 border: solid 5px #000;
                 border-width:0 4px 5px 0;
                 border-radius:5px;
-                background:linear-gradient(to bottom, #f8df20 5%, #f8df20 100%);
-                border-color:transparent #f5e77a #d3bc0d transparent;
+                border-color:transparent #7BB9C6 #599bb3 transparent;
+                background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
                 background-clip:padding-box;
             }
             
@@ -68,7 +68,7 @@
             }
             
             #btn1 {
-                color:#ffffff;
+                color:#000000;
                 background:linear-gradient(to bottom, #28A745 5%, #28A745 100%);
                 background-color:#28A745;
                 border: solid 5px #000;
@@ -79,7 +79,7 @@
             }
             
             #btn2 {
-                color:#ffffff;
+                color:#000000;
                 background-color:#BA0B11;
                 border: solid 5px #000;
                 border-width:0 4px 5px 0;
@@ -89,14 +89,13 @@
             }
             
             #btn3 {
-                color:#ffffff;
-                background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+                color:#000000;
                 background-color:#2b638f;
                 border: solid 5px #000;
                 border-width:0 4px 5px 0;
                 border-radius:5px;
-                border-color:transparent #7BB9C6 #599bb3 transparent;
-                background-clip:padding-box;
+                background:linear-gradient(to bottom, #f8df20 5%, #f8df20 100%);
+                border-color:transparent #f5e77a #d3bc0d transparent;
             }
             
             .buttons:active {
@@ -105,7 +104,7 @@
             }
             
             .border {
-                border-width:5px !important;
+                border-width:10px !important;
             }
             
             #start_btn {
@@ -167,6 +166,8 @@
                     alert('Please enter your provided Qualtrics ID!');
                 }
             }
+            
+            var progress_str = '<div class=col id="pbar-div"><div style="width: 200px; height: 50px;" class="progress" id="pdiv"><div id="pbar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div id="timer" class="justify-content-left d-flex position-absolute w-100" style="color: black; font-size:16px; margin-left: 10px;">Timer</div></div></div></div>';
         </script>
     </head>
     <body>
@@ -198,23 +199,14 @@
                         </div>
                     </div>
                     
-                    <div class="row text-center d-flex justify-content-center" style="margin-top: 35px;">
+                    <div class="row text-center d-flex justify-content-center" id='row1' style="margin-top: 35px;">
                         <div style="font-family:tahoma,garamond,serif;font-size:16px;"><b>How do you classify these two images?</b></div>
                     </div>
                     
-                    <div class="row" style="margin-top: 20px;">
-                        <div class=col>
-                            <button id="AI-dec" onclick="" type="button" style="font-family:tahoma,garamond,serif;font-size:15px; font-weight: bold; margin-top: 15px;" class="aibtn float-right">Show Suggestion</button>
+                    <div id="aisugg" class="row" style="margin-top: 20px;">
+                        <div class='col text-center'>
+                            <button id="AI-dec" onclick="" type="button" style="font-family:tahoma,garamond,serif;font-size:15px; font-weight: bold; margin-top: 15px;" class="aibtn">Show Suggestion</button>
                         </div>
-                        
-                        <div class=col>
-                            <div style="width: 200px; height: 50px;" class="progress" id='pdiv'>
-                                <div id="pbar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                    <div id="timer" class="justify-content-left d-flex position-absolute w-100" style="color: black; font-size:16px; margin-left: 10px;">Timer</div>
-                                </div>
-                            </div>
-                        </div>
-                    
                     </div>
                     
                     <div id="inter" class="row d-flex justify-content-center" style="margin-top: 30px;  margin-bottom: -65px;">
@@ -223,14 +215,14 @@
                         </div>
                     </div>
                     
-                    <div class="row d-flex justify-content-center" style="margin-top: 30px;">
+                    <div class="row d-flex justify-content-center" id="btns-row" style="margin-top: 30px;">
                         <div id="btns_div" class="align-self-center">
                             <button class="buttons" id="btn1" type="button" onclick="">Same</button>
                             <button class="buttons" id="btn2" type="button" onclick="">Different</button>
                             <button class="buttons" id="btn3" type="button" onclick="">Unsure</button>
                         </div>
                     </div>
-                    
+                    <!--
                     <div class="row" style="margin-top: 45px;">
                         <div class=col>
                             <div style="font-family:tahoma,garamond,serif;font-size:16px;" class="float-right"><p id="remain"></p></div>
@@ -240,6 +232,11 @@
                           
                         </div>
                     
+                    </div>
+                    -->
+                    
+                    <div class="row justify-content-center" style="margin-top: -230px; height: 200px; background-color: #ffffff; z-index: -1;">
+                        <b class="align-self-center" id="final-dec"></b>
                     </div>
                     
                 </div>
@@ -264,7 +261,8 @@
                 files.push(filenames[i].split(', '));
             }
             var probs = Array(1.0, 0.75, 0.5, 0.25, 0.0);
-            var workflow_ind = 2; // Math.floor(Math.random() * probs.length);
+            var decisions = Array('Same', 'Different', 'Unsure');
+            var workflow_ind = 2;
             var soft_prob = probs[workflow_ind];
             console.log('Workflow = ' + workflow_ind);
             document.getElementById('start_btn').style.visibility = 'visible';
@@ -286,6 +284,10 @@
             current_time = 0;
             max_time = 0
             var wait_flag = 0;
+            var show_final_dec = false;
+            var user_decided = false;
+            var clicked_count = 0;
+            
             var timer = setInterval(function(){
                 if (not_started == false){
                     current_time -= 1;
@@ -295,8 +297,62 @@
                         stop_survey();
                     }
                     
-                    if (current_time < 0) {
+                    if (current_time < 0 && show_final_dec) {
+                        // show the final AI's decision: hide the rows and display a simple msg
+                        document.getElementById('final-dec').style.visibility = 'visible';
+                        document.getElementById('row1').style.visibility = 'hidden';
+                        document.getElementById('aisugg').style.visibility = 'hidden';
+                        document.getElementById('inter').style.visibility = 'hidden';
+                        document.getElementById('AI-dec').style.visibility = 'hidden';
+                        document.getElementById('btns-row').style.visibility = 'hidden';
+                        if(document.getElementById('pdiv')) {
+                            document.getElementById('pdiv').style.visibility = 'hidden';
+                            document.getElementById('timer').style.visibility = 'hidden';
+                        }
+                        
+                        remove_past_borders();
+                        
+                        // set the final decision
+                        f1 = files[current_pair_ind][0].split('/');
+                        f1 = f1[f1.length - 1].split('_')[0];
+
+                        if(user_decided == 1) {
+                            document.getElementById('final-dec').innerHTML = 'Final decision = <span style="color: green;font-family:tahoma,garamond,serif;font-size:16px;">Same</span>';
+                            document.getElementById("img1").classList.add('border');
+                            document.getElementById("img2").classList.add('border');
+                            document.getElementById("img1").classList.add('border-success');
+                            document.getElementById("img2").classList.add('border-success');
+                        } else if(user_decided == 2) {
+                            document.getElementById('final-dec').innerHTML = 'Final decision = <span style="color: red;font-family:tahoma,garamond,serif;font-size:16px;">Different</span>';
+                            document.getElementById("img1").classList.add('border');
+                            document.getElementById("img2").classList.add('border');
+                            document.getElementById("img1").classList.add('border-danger');
+                            document.getElementById("img2").classList.add('border-danger');
+                        } else if(user_decided == 3) {
+                            document.getElementById('final-dec').innerHTML = 'Final decision = <span style="color: #f8df20;font-family:tahoma,garamond,serif;font-size:16px;">Unsure</span>';
+                            document.getElementById("img1").classList.add('border');
+                            document.getElementById("img2").classList.add('border');
+                            document.getElementById("img1").classList.add('border-warning');
+                            document.getElementById("img2").classList.add('border-warning');
+                        }
+                        
+                        current_time = 3;
+                        show_final_dec = false;
+                    }
+                    else if (current_time < 0) {
+                        document.getElementById('final-dec').style.visibility = 'hidden';
+                        document.getElementById('row1').style.visibility = 'visible';
+                        document.getElementById('aisugg').style.visibility = 'visible';
+                        document.getElementById('inter').style.visibility = 'visible';
+                        document.getElementById('btns-row').style.visibility = 'visible';
+                        if(document.getElementById('pdiv')) {
+                            document.getElementById('pdiv').style.visibility = 'visible';
+                            document.getElementById('timer').style.visibility = 'visible';
+                        }
+                        user_decided = false;
                         wait_flag = false;
+                        show_final_dec = true;
+                        
                         // goto next image or case here
                         // check if the survey is finished
                         if(current_pair_ind == files.length) {
@@ -304,17 +360,7 @@
                         }
 
                         // remove past borders
-                        if ($("#img1").hasClass("border-danger")) {
-                            document.getElementById("img1").classList.remove('border');
-                            document.getElementById("img2").classList.remove('border');
-                            document.getElementById("img1").classList.remove('border-danger');
-                            document.getElementById("img2").classList.remove('border-danger');
-                        } else {
-                            document.getElementById("img1").classList.remove('border');
-                            document.getElementById("img2").classList.remove('border');
-                            document.getElementById("img1").classList.remove('border-success');
-                            document.getElementById("img2").classList.remove('border-success');
-                        }
+                        remove_past_borders();
 
                         // get a random chance for displaying AI or not
                         if(Math.random() > soft_prob) {
@@ -326,22 +372,35 @@
                             $("#img1").attr("src", files[current_pair_ind][0]);
                             $("#img2").attr("src", files[current_pair_ind][1]);
                             document.getElementById('inter').style.visibility = 'hidden';
-                            document.getElementById('timer').style.visibility = 'hidden';
-                            document.getElementById('pdiv').style.visibility = 'hidden';
+                            // document.getElementById('timer').style.visibility = 'hidden';
                             document.getElementById('AI-dec').style.visibility = 'visible';
                             document.getElementById("AI-dec").classList.add('aibtn');
                             document.getElementById("AI-dec").style.background = bg;
                             document.getElementById("AI-dec").style.border = br;
                             document.getElementById("AI-dec").innerHTML = 'Show AI\'s Suggestion';
                             document.getElementById("AI-dec").onclick = function () {show_sugg();};
+                            document.getElementById('AI-dec').style.width = '400px';
+                            //document.getElementById('pdiv').style.visibility = 'hidden';
+                            document.getElementById("img1").classList.add('border');
+                            document.getElementById("img2").classList.add('border');
+                            document.getElementById("img1").classList.add('border-warning');
+                            document.getElementById("img2").classList.add('border-warning');
+                            
+                            var rmthis = document.getElementById('pbar-div');
+                            if (rmthis) {
+                                rmthis.remove(rmthis.selectedIndex);
+                            }
                             
                             // show deciding buttons
-                            current_time = 31;
+                            current_time = 31 * 1000;
                             current_pair_ind = Math.floor((Math.random() * (filenames.length - 1)));
                             max_time = 31;
                             show_buttons();
                         } else {
                             // Display AI pair
+                            if (!document.getElementById('pbar-div')){
+                                $("#aisugg").append(progress_str);
+                            }
                             aipair = true;
                             clicked = false;
                             $("#img1").attr("src", files[current_pair_ind][0]);
@@ -351,6 +410,7 @@
                             document.getElementById("AI-dec").style.background = 'none';
                             document.getElementById("AI-dec").style.border = 'none';
                             document.getElementById("AI-dec").onclick = function () {};
+                            document.getElementById('AI-dec').style.width = '200px';
 
                             // display text for AI decision
                             document.getElementById('AI-dec').style.visibility = 'visible';
@@ -358,11 +418,12 @@
                             document.getElementById('btns_div').style.visibility = 'hidden';
                             document.getElementById('timer').style.visibility = 'visible';
                             document.getElementById('pdiv').style.visibility = 'visible';
-
                             
                             f1 = files[current_pair_ind][0].split('/');
                             f1 = f1[f1.length - 1].split('_')[0];
 
+                            remove_past_borders();
+                            
                             if (f1 == 0) {
                                 // set color and text
                                 document.getElementById("AI-dec").innerHTML = 'AI Decides = <span style="color: green;">Same</span>';
@@ -370,6 +431,7 @@
                                 document.getElementById("img2").classList.add('border');
                                 document.getElementById("img1").classList.add('border-success');
                                 document.getElementById("img2").classList.add('border-success');
+                                user_decided = 1;
                             }
                             else {
                                 document.getElementById("AI-dec").innerHTML = 'AI Decides = <span style="color: red;">Different</span>';
@@ -377,7 +439,7 @@
                                 document.getElementById("img2").classList.add('border');
                                 document.getElementById("img1").classList.add('border-danger');
                                 document.getElementById("img2").classList.add('border-danger');
-
+                                user_decided = 2;
                             }
                             
                             current_pair_ind = Math.floor((Math.random() * (filenames.length - 1)));
@@ -386,10 +448,10 @@
 
                     } else {
                         // wait at least for 5 seconds
-                        if (wait_flag == 0){ 
+                        if (wait_flag == 0 && document.getElementById("pbar")){ 
                             document.getElementById("timer").innerHTML = 'Decision Timeout: ' + current_time;
                             document.getElementById("pbar").style.width = ((100 * (current_time)) / (max_time - 1)).toString() + '%';
-                        } else {
+                        } else if(document.getElementById("pbar")){
                             document.getElementById("timer").innerHTML = 'Wait: ' + current_time;
                             document.getElementById("pbar").style.width = ((100 * (current_time)) / (wait_flag - 1)).toString() + '%';
                         }
@@ -409,6 +471,25 @@
                 return (new Array(length+1).join(pad)+string).slice(-length);
             }
             
+            function remove_past_borders() {
+                if ($("#img1").hasClass("border-danger")) {
+                    document.getElementById("img1").classList.remove('border');
+                    document.getElementById("img2").classList.remove('border');
+                    document.getElementById("img1").classList.remove('border-danger');
+                    document.getElementById("img2").classList.remove('border-danger');
+                } else if($("#img1").hasClass("border-success")) {
+                    document.getElementById("img1").classList.remove('border');
+                    document.getElementById("img2").classList.remove('border');
+                    document.getElementById("img1").classList.remove('border-success');
+                    document.getElementById("img2").classList.remove('border-success');
+                } else if($("#img1").hasClass("border-warning")) {
+                    document.getElementById("img1").classList.remove('border');
+                    document.getElementById("img2").classList.remove('border');
+                    document.getElementById("img1").classList.remove('border-warning');
+                    document.getElementById("img2").classList.remove('border-warning');
+                }
+            }
+            
             // intervene button
             function intervene() {
                 // show deciding buttons
@@ -422,8 +503,9 @@
             
             // add user response function
             function add_user_response(resp) {
-                if (!clicked && !aipair) {
+                if (!clicked && !aipair && clicked_count == 0) {
                     alert('Please check the AI\'s suggestion first!');
+                    clicked_count = 1;
                     return false;
                 }
                 
@@ -435,14 +517,17 @@
                 
                 user_result[img1_path + ' ' + img2_path] = resp + '|' + clicked + '|' + aipair;
                 if (current_time >= 26) {
-                    wait_flag = 7 - (31 - current_time);
+                    wait_flag = 7 - (31000 - current_time);
                     current_time = wait_flag;
                 } else{
                     wait_flag = 0;
                     current_time = 0;
                 }
-                document.getElementById('timer').style.visibility = 'visible';
-                document.getElementById('pdiv').style.visibility = 'visible';
+                if (document.getElementById('timer')) {
+                    document.getElementById('timer').style.visibility = 'visible';
+                    document.getElementById('pdiv').style.visibility = 'visible';
+                }
+                user_decided = resp;
                 return true;
             }
             
@@ -452,6 +537,8 @@
                 f1 = f1[f1.length - 1].split('_')[0];
                 clicked = true;
 
+                remove_past_borders();
+                
                 if (f1 == 0) {
                     // set color and text
                     document.getElementById("AI-dec").innerHTML = 'AI Suggests = <span style="color: green;">Same</span>';
