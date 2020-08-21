@@ -17,7 +17,7 @@ My resume is available [here](https://davood-m.github.io/files/resume.pdf) (upda
 **News**
 - I am volunteering for [ACL 2020](https://acl2020.org/) conference.
 
-- I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png) as an applied research (DL) intern on Summer 2021.
+[//]: <> (- I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png) as an applied research (DL) intern on Summer 2021.)
 
 - I recieved the ASU Engineering Graduate Fellowship from Ira A. Fulton Schools of Engineering.
 
