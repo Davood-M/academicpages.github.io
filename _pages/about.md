@@ -15,6 +15,8 @@ My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelli
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 5/6/2020)
 
 **News**
+- Invited to serve as a program committee (PC) member for [30th International Joint Conference on Artificial Intelligence (IJCAI-21)](https://ijcai-21.org/).
+
 - I am volunteering for [ACL 2020](https://acl2020.org/) conference.
 
 [//]: <> (- I'm joining ![Nvidia](https://davood-m.github.io/files/nvidia.png) as an applied research (DL) intern on Summer 2021.)
