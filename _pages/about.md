@@ -12,7 +12,7 @@ Hi!
 
 My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelligence from Shiraz University under supervision of [Prof. Ali Hamzeh](http://shirazu.ac.ir/faculty/home/ali/en). Currently, I am a second year PhD student at Arizona State University working at the [DMML lab](http://dmml.asu.edu/) under supervision of [Prof. Huan Liu](http://www.public.asu.edu/~huanliu/). My research interest mainly lies within machine learning and natural language processing algorithms and applications.
 
-My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 5/6/2020)
+My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 8/27/2020)
 
 **News**
 - Invited to serve as a program committee (PC) member for [30th International Joint Conference on Artificial Intelligence (IJCAI-21)](https://ijcai-21.org/).
