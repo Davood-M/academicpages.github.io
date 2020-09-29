@@ -15,6 +15,8 @@ My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelli
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 8/27/2020)
 
 **News**
+- Our paper "Toward Privacy and Utility Preserving Image Representation" is accepted in SBP-BRiMS 2020.
+
 - Invited to serve as a program committee (PC) member for the [Thirty-Fifth AAAI Conference on Artificial Intelligence (AAAI-21)](https://aaai.org/Conferences/AAAI-21/).
 
 - Invited to serve as a program committee (PC) member for the [30th International Joint Conference on Artificial Intelligence (IJCAI-21)](https://ijcai-21.org/).
