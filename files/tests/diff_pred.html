@@ -243,7 +243,7 @@
                     </div>
                     
                     <div class="row text-center d-flex justify-content-center" id='row1' style="margin-top: 35px;">
-                        <div style="font-family:tahoma,garamond,serif;font-size:16px;"><b id='main_text'>How do you classify these two images?</b></div>
+                        <div style="font-family:tahoma,garamond,serif;font-size:16px;"><b id='main_text'></b></div>
                     </div>
                     
                     <div id="btns-row" class="row d-flex justify-content-center" style="margin-top: 50px;  margin-bottom: -65px;">
@@ -383,9 +383,9 @@
                         f1 = f1[f1.length - 1].split('_')[0];
 
                         if (f1 == 0) {
-                            document.getElementById('main_text').innerHTML = 'AI thinks that they are the ' + '<span style="color: green;">same</span>' + ' person but is unsure. What is your decision?';
+                            document.getElementById('main_text').innerHTML = 'Are these photos of the same or different people?' // 'AI thinks that they are the ' + '<span style="color: green;">same</span>' + ' person but is unsure. What is your decision?';
                         } else {
-                            document.getElementById('main_text').innerHTML = 'AI thinks that they are ' + '<span style="color: red;">different</span>' + ' people but is unsure. What is your decision?';
+                            document.getElementById('main_text').innerHTML = 'Are these photos of the same or different people?' // 'AI thinks that they are ' + '<span style="color: red;">different</span>' + ' people but is unsure. What is your decision?';
                         }
 
                         // show deciding buttons
