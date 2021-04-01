@@ -15,7 +15,7 @@ My name is David (Ahmadreza) Mosallanezhad. I got my M.Sc. in Artificial Intelli
 My resume is available [here](https://davood-m.github.io/files/resume.pdf) (updated on 12/11/2020)
 
 **News**
-- Hopefully, I'll be joining ![Nvidia](https://davood-m.github.io/files/nvidia.png) as an applied research (DL) intern in Summer 2021.
+- Invited to serve as a program committee (PC) member for the [The 2021 Conference on Empirical Methods in Natural Language Processing (EMNLP-21)](https://2021.emnlp.org/).
 
 - Our paper "Deferral Rate, Human Performance, and Trust Perception: A Human-AI Joint Face-Detection Task" is accepted in HFES 2021.
 
